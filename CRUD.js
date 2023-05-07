@@ -12,31 +12,89 @@ const listaDeContactos = document.getElementById('listaDeContactos');
 
 
 
-/** PARA MOSTRAR */
+/** PARA MOSTRAR --------------------------------------------------------------------------------------------------------------*/
 function mostrarContactos() {
     let infoDelHTML = '';
-    contactos.forEach(function (contacto) {
+    contactos.forEach(function (contacto, index) {
         infoDelHTML += `
         <li class="listado">
         <label>${contacto.nombre}</label>
         <label>${contacto.apellido}</label>
         <br/>
         <label>${contacto.correo}</label> 
-        <button onclick="alert('EditarUsuario')"> Editar </button>
-        <button onclick="alert('EliminarUsuario')"> Eliminar </button>    
+        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="editarContacto(${index})"> Editar </button>
+        <button onclick="eliminarContacto(${index})"> Eliminar </button>    
         </li>
          <br/>
         `;
-    });
+  });
     listaDeContactos.innerHTML = infoDelHTML
 }
 
 
 
+/** PARA ELIMINAR --------------------------------------------------------------------------------------------------------------*/
+function eliminarContacto(index) {
+    contactos.splice(index, 1);
+    almacenarInfoContactos(contactos);
+    mostrarContactos();
+}
 
 
 
-/** PARA CREAR O GUARDAR */
+/** PARA EDITAR ---------------------------------------------------------------------------------------------------------------*/
+let indiceContactoActual = -1; // Valor inicial para indicar que no se ha seleccionado ningún contacto
+
+function obtenerContactoActual() {
+  if (indiceContactoActual >= 0 && indiceContactoActual < contactos.length) {
+    return contactos[indiceContactoActual];
+  }
+  return null;
+}
+
+function modificarContacto() {
+    const contactoActual = obtenerContactoActual();
+    if (contactoActual) {
+      const modalNombre = document.getElementById('modal-nombre');
+      const modalApellido = document.getElementById('modal-apellido');
+      const modalCorreo = document.getElementById('modal-correo');
+      contactoActual.nombre = modalNombre.value ;
+      contactoActual.apellido = modalApellido.value;
+      contactoActual.correo = modalCorreo.value;
+
+      contactos[indiceContactoActual] = {
+        ...contactos[indiceContactoActual],
+        ...contactoActual,
+      };
+      almacenarInfoContactos(contactos);
+      mostrarContactos();
+     
+    }
+}
+/** Se agrega un evento show.bs.modal al modal para que cada vez que se muestre, se llame a la función 
+ * "modificarContacto()" y actualice los valores del modal con el contacto actual */
+const modal = document.getElementById('btnModificar');
+modal.addEventListener('click', modificarContacto); 
+
+/** Modifica la función editarContacto(index) para guardar el índice del contacto seleccionado en la 
+ * variable indiceContactoActual antes de mostrar el modal */
+function editarContacto(index) {
+    indiceContactoActual = index;
+    const contactoActual = obtenerContactoActual();
+    if (contactoActual) {
+        const modalNombre = document.getElementById('modal-nombre');
+        const modalApellido = document.getElementById('modal-apellido');
+        const modalCorreo = document.getElementById('modal-correo');
+        modalNombre.value = contactoActual.nombre;
+        modalApellido.value = contactoActual.apellido;
+        modalCorreo.value = contactoActual.correo;
+      }
+  }
+
+
+
+
+/** PARA CREAR O GUARDAR ------------------------------------------------------------------------------------------------------------*/
 
 function guardarContacto() {
     /**se obtienen los datos ingresados */
@@ -55,9 +113,7 @@ function guardarContacto() {
     mostrarContactos();
 }
 
-btnGuardar.addEventListener('click', guardarContacto)
-
-
+btnGuardar.addEventListener('click', guardarContacto);
 
 
 
