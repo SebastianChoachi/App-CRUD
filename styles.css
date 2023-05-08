@@ -2,7 +2,40 @@
     background-color: red;
 }
 
+.margen{
+    margin:2% 2% 2% 2%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.title-listado{
+    margin: 2% 10px 10px 10px;
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 2fr;
+    grid-gap: 10px;
+    text-align: center;
+    padding: 0% 2% 0% 2%;
+    
+}
 
 .listado{
-    border: 1px solid blue;
+   /* border: 1px solid blue;*/
+    padding: 0% 2% 2% 2%;
+    margin: 10px;
+}
+
+.ligrid{
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 2fr;
+    grid-gap: 10px;
+    text-align: center;
+    border-top: solid 0.5px gainsboro;
+    padding: 5px;
+}
+
+.btn-edit{
+    background: url(pencil-fill.svg) no-repeat;
+    float: left;
+    width: 10px;
+    height: 40px;
 }
