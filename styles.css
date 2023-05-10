@@ -43,7 +43,7 @@
 footer {
     padding: 5%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
     background-color: rgba(215, 211, 211, 0.258);
     column-gap: 1%;
 }
