@@ -39,3 +39,28 @@
     width: 10px;
     height: 40px;
 }
+
+footer {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgba(215, 211, 211, 0.258);
+    column-gap: 1%;
+}
+
+
+.header{
+    height: 80px;
+    background-color: #e3f2fd;
+}
+
+@media(max-width: 600px) {
+
+    footer {
+        font-size: small;
+    }
+    header{
+        height: 30px;
+    }
+
+}
