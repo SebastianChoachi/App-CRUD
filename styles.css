@@ -41,7 +41,7 @@
 }
 
 footer {
-    padding: 2%;
+    padding: 5%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: rgba(215, 211, 211, 0.258);
@@ -59,7 +59,7 @@ footer {
     footer {
         font-size: small;
     }
-    header{
+    .header{
         height: 30px;
     }
 
